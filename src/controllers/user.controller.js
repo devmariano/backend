@@ -23,6 +23,33 @@ class UserController {
             })
         }
     }
+
+    async findAll(req, res) {
+        try {
+            const users = await User.findAll()
+
+            return res.status(200).send(users)
+        } catch (error) {
+            return res.status(400).send({
+                message: "Erro ao listar todos os usuários",
+                cause: error.message
+            })
+        }
+    }
+
+    async findOne(req, res) {
+        try {
+            const { userId } = req.params
+            const user = await User.findByPk(userId)
+
+            return res.status(200).send(user)
+        } catch (error) {
+            return res.status(400).send({
+                message: "Erro ao listar todos os usuários",
+                cause: error.message
+            })
+        }
+    }
 }
 
 module.exports = new UserController()
