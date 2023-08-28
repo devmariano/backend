@@ -1,16 +1,16 @@
-const { create, findAll, findOne, login } = require('../controllers/user.controller')
+const { create, findAll, findOne, login, findCarts } = require('../controllers/user.controller')
 const { Router } = require('express')
-const {auth} = require('../middlewares/auth.middleware')
-const {logger} = require('../middlewares/logger.middleware')
+const { auth } = require('../middlewares/auth.middleware')
 
 
 class UserRouter{
     routesFromUser() {
         const userRoutes = Router()
         userRoutes.post('/users', create)
-        userRoutes.get('/users', auth, findAll)
-        userRoutes.get('/users/:userId',  auth, logger, findOne)
+        userRoutes.get('/users', auth , findAll)
+        userRoutes.get('/users/:userId', auth, findOne)
         userRoutes.post('/users/login', login)
+        userRoutes.get('/users/:userId/carts', findCarts)
 
         return userRoutes
     }

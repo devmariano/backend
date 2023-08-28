@@ -4,7 +4,7 @@ const routes = require('./routes')
 const cors = require('cors')
 
 class Server {
-    constructor ( server = express())
+    constructor ( server = express() )
     {
         this.middlewares(server)
         this.database()

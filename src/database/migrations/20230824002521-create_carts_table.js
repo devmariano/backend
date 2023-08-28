@@ -3,24 +3,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-     await queryInterface.createTable('users', { 
-      user_id: {
+     await queryInterface.createTable('carts', { 
+      cart_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      name: {
-        type: Sequelize.STRING,
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'user_id'
+        }
+      },
+      price: {
+        type: Sequelize.NUMERIC(2),
         allowNull: false
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false
+      status: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       created_at: {
         type: Sequelize.DATE,
@@ -38,7 +42,7 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
 
-   await queryInterface.dropTable('users');
+   await queryInterface.dropTable('carts');
 
   }
 };

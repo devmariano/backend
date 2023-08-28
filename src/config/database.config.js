@@ -10,6 +10,6 @@ module.exports = {
     port: process.env.DB_PORT,
     define: {
         underscored: true,
-        underscoredAll: true,
+        underscoredAll: true
     }
 }
