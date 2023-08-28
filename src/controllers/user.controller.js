@@ -44,7 +44,7 @@ class UserController {
             const user = await User.findByPk(userId)
 
             if (!user){
-                return res.status(404).send('Usuário não encontrado')
+                return res.status(404).send({message: "Usuário não encontrado"})
             }
 
             return res.status(200).send(`Usuário: ${user.email}`)
