@@ -1,4 +1,4 @@
-const { INTEGER, STRING, FLOAT } = require('sequelize')
+const { INTEGER } = require('sequelize')
 const { connection } = require('../database/connection')
 
 const ProductCart = connection.define('productCarts', {

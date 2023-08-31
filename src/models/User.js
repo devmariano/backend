@@ -22,7 +22,8 @@ const User = connection.define('users', {
     }
 }, {undescored: true, paranoid: true })
 
-Cart.belongsTo(User, {foreignKey : 'user_id'})
-User.hasMany(Cart,{foreignKey : 'user_id'})
+Cart.belongsTo(User, {foreignKey : 'userId'})
+//um usuario possui varios carrrinhos 
+User.hasMany(Cart,{foreignKey : 'userId'})
 
 module.exports = { User }
