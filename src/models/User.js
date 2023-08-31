@@ -1,6 +1,7 @@
 const { INTEGER, STRING } = require('sequelize')
 const { connection } = require('../database/connection')
 const { Cart } = require('../models/Cart')
+const { encryptedPassword } = require('../utils/functions')
 
 const User = connection.define('users', {
     userId:  {
@@ -20,7 +21,10 @@ const User = connection.define('users', {
         type: STRING,
         allowNull: false
     }
-}, {undescored: true, paranoid: true })
+}, {undescored: true, paranoid: true, hooks:{
+    beforeCreate: encryptedPassword
+}
+})
 
 Cart.belongsTo(User, {foreignKey : 'userId'})
 //um usuario possui varios carrrinhos 
