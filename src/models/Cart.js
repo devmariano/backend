@@ -26,6 +26,7 @@ const Cart = connection.define('carts', {
     }
 }, {undescored: true, paranoid: true })
 
+
 //relacionamento muitos para muitos : 1 produto pertence a muitos carrinhos e 1 carrinho pertence a muitos produtos
 //para ajudar o sequelize a fazer a relação é informado a tabela auxiliar productCart e suas chaves estrangeiras
 Product.belongsToMany(Cart, { through: ProductCart, foreignKey: 'productId', as: 'carts' });

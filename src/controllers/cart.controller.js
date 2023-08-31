@@ -1,5 +1,6 @@
 const { Cart } = require('../models/Cart')
 const { Product } = require('../models/Product')
+const {User} = require('../models/User')
 
 
 class CartController {
@@ -10,7 +11,7 @@ class CartController {
             } = req.body
 
             const user = await User.findByPk(userId)
-
+            console.log(user)
             if(!user){
                 return res.status(404).send({message: "O usuário informado não existe!"})
             }
