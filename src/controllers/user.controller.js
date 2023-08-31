@@ -1,6 +1,7 @@
 const { sign } = require('jsonwebtoken')
 const { User } = require('../models/User')
 const { Cart } = require('../models/Cart')
+const bcrypt = require('bcrypt')
 
 class UserController {
     async create(req, res) {
@@ -69,7 +70,11 @@ class UserController {
                 return res.status(404).send({message: "Usuário não Encontrado!"})
             }
 
-            if ( user.password === password ) {
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+
+            if (isPasswordValid) {
+
+            //if ( user.password === password ) {
                 const payload = {
                     name: user.name,
                     email: user.email
