@@ -22,7 +22,8 @@ const User = connection.define('users', {
         allowNull: false
     }
 }, {undescored: true, paranoid: true, hooks:{
-    beforeCreate: encryptedPassword
+    beforeCreate: encryptedPassword,
+    beforeUpdate: encryptedPassword
 }
 })
 

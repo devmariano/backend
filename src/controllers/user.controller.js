@@ -2,6 +2,7 @@ const { sign } = require('jsonwebtoken')
 const { User } = require('../models/User')
 const { Cart } = require('../models/Cart')
 const bcrypt = require('bcrypt')
+const { update } = require('../services/user.services')
 
 class UserController {
     async create(req, res) {
@@ -129,18 +130,48 @@ class UserController {
             }
 
             if(!name){
-                return res.status(404).send({message:`Nenhum nome válido para alteração`})
+                return res.status(400).send({message:`Nenhum nome válido para alteração`})
             }
 
             if(name === user.name){
-                return res.status(404).send({message:`Usuário já utiliza este nome`})
+                return res.status(403).send({message:`Usuário já utiliza este nome`})
             }
-
+            //passou a consumir o service
+            await update(userId, {name})
             //await user.update({name:name})
             //return res.status(200).send({name})
-            const userUpdated = await User.update({name}, {where: {userId}})
+            /*await User.update(
+                {name}, 
+                {where: {userId}
+            })*/
             return res.status(204).send()
         } catch (error) {
+            return res.status(400).send({
+                message: "Erro ao realizar o update do usuário",
+                cause: error.message
+            })
+        }
+    }
+
+    async updatePassword(req, res) {
+        try{
+            const { userId } = req.params
+            const { password } = req.body
+
+            const user = await User.findByPk(userId)
+
+            if(!user){
+                return res.status(404).send({message:`Usuário não encontrado`})
+            }
+
+            const match = bcrypt.compareSync(password, user.password)
+            if (match){
+                return res.status(400).json({ error: "Usuário ja utiliza esta senha"})
+            }
+
+            await update(userId, {password})
+            return res.status(204).send()
+        } catch (error){
             return res.status(400).send({
                 message: "Erro ao realizar o update do usuário",
                 cause: error.message
