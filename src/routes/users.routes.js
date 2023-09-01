@@ -12,7 +12,7 @@ class UserRouter{
         userRoutes.patch('/users/:userId', auth, update)
         userRoutes.patch('/users/:userId/password', auth, updatePassword)
         userRoutes.post('/users/login', login)
-        userRoutes.get('/users/:userId/carts', findCarts)
+        userRoutes.get('/users/:userId/carts', auth, findCarts)
 
         return userRoutes
     }
