@@ -1,16 +1,22 @@
-# Iniciar o Projeto
+#M3S04 - Ex 01 a 07 criação de uma api para e-commerce
+## Modelo utilizado na base de dados
+<img src="./SchemaDB.png">
+
+## Iniciar o Projeto
 
 Com o .env devidamente configurado:
 
-1º npm install
-2º npx sequelize-cli db:migrate
+primeiro instale as dependencias:
+### `npm install`
+
+depois migre o banco de dados:
+
+### `npx sequelize-cli db:migrate`
 
 
-configurar novo migrate exemplo:
+Anotações:
+
+para configurar novo migrate exemplo:
 ```sh
 npx sequelize-cli migration:create --name create_carts_table
-```
-executar migrates no bd 
-```sh
-npx sequelize-cli db:migrate
 ```

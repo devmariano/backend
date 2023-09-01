@@ -77,11 +77,12 @@ class UserController {
 
             //if ( user.password === password ) {
                 const payload = {
+                    userId: user.userId,
                     name: user.name,
                     email: user.email
                 }
 
-                const token = sign(payload, process.env.JWT_SECRET)
+                const token = sign(payload, process.env.JWT_SECRET, { expiresIn: "1y"})
                 return res.status(200).send({token})
             }
             else {
