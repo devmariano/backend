@@ -13,11 +13,11 @@ WORKDIR /app
 EXPOSE 3333
 
 ENV DB_DIALECT=postgres
-ENV DB_HOST=localhost
-ENV DB_USERNAME=postgres
-ENV DB_PASSWORD=root
-ENV DATABASE=postgres
-ENV DB_PORT=5432
+ENV DB_HOST=postgres
+ENV DB_USERNAME=postgresadmin
+ENV DB_PASSWORD=postgres123
+ENV DATABASE=postgresdb
+ENV DB_PORT=5431
 ENV JWT_SECRET=tokenSuperForte
 
 COPY --from=BUILDER ["/app/node_modules/", "/app/node_modules/"]
